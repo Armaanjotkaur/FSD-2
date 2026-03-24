@@ -16,12 +16,12 @@ def get_account_details(user_id):
     if not customer:
         return jsonify({"error": "Customer not found"}), 404
 
-    # Call Order Service
+    # 🔥 Call Order Service (UPDATED URL)
     try:
         response = requests.get(
-            f"http://localhost:5002/orders/user/{user_id}",
-            timeout=3
-        )
+            f"https://exp11-order-service.onrender.com/orders/user/{user_id}",
+            timeout=5
+    )
 
         if response.status_code == 200:
             orders = response.json()
@@ -29,7 +29,7 @@ def get_account_details(user_id):
             orders = []
     except requests.exceptions.RequestException:
         orders = []
-    
+
     account_data = {
         "customer": customer,
         "orders": orders
@@ -44,4 +44,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(port=5001, debug=True)
+    app.run(debug=True)
