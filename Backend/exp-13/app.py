@@ -2,13 +2,18 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from marshmallow import Schema, fields, validate, ValidationError
 import pymysql
+import os
+from dotenv import load_dotenv
+
+# 🔐 load .env file
+load_dotenv()
 
 pymysql.install_as_MySQLdb()
 
 app = Flask(__name__)
 
-# 🔥 AIVEN MYSQL CONNECTION
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://avnadmin:AVNS_78ZgL_35YWdS_VlB9xf@mysql-b5b148c-armaan.d.aivencloud.com:14058/defaultdb"
+# 🔥 DATABASE FROM ENV (NO HARDCODE PASSWORD)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # 🔐 SSL REQUIRED FOR AIVEN
