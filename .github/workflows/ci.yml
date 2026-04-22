@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: testing2   # ✅ IMPORTANT
+        working-directory: Testing2   # ✅ IMPORTANT
 
     steps:
     - name: Checkout code
